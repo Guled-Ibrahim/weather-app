@@ -26,6 +26,7 @@
     background-color: #9ca3af;
     color: white;
     font-size: 1rem;
+    border-radius: 5%;
   }
   .navbar__input::placeholder {
     color: white;
@@ -77,11 +78,40 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 32px;
   }
   .weather__text {
     color: #9ca3af;
     text-transform: capitalize;
     font-weight: 400;
     font-size: 1.953rem;
+  }
+  .weather__present {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: #9ca3af;
+    margin-top: 32px;
+  }
+  .weather__day {
+    text-transform: capitalize;
+  }
+  .weather__day::after {
+    content: '\00b7';
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  .weather__date {
+    text-transform: capitalize;
+  }
+  .weather__location {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #9ca3af;
+    margin-top: 48px;
+  }
+  .location__text {
+    margin-left: 8px;
   }
 }

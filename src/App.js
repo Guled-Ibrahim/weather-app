@@ -10,7 +10,7 @@ const App = () => {
             className='navbar__input'
           />
           <button className='navbar__btn'>
-            <i className='fas fa-map-marker-alt fa-lg'></i>
+            <i class='fas fa-location-arrow fa-lg'></i>
           </button>
         </div>
         <div className='weather__container'>
@@ -26,9 +26,14 @@ const App = () => {
           <div className='weather__info'>
             <h2 className='weather__text'>shower</h2>
           </div>
-          <div className='weather__date'>
+          <div className='weather__present'>
             <p className='weather__day'>today</p>
-            <p className='weather__month'>fri, 5 jun</p>
+            <p className='weather__date'>fri, 5 jun</p>
+          </div>
+          <div className='weather__location'>
+            <i class='fas fa-map-marker-alt fa-lg'>
+              <span className='location__text'>London</span>
+            </i>
           </div>
         </div>
       </div>
