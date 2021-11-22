@@ -58,15 +58,10 @@
     justify-content: center;
     margin-top: 24px;
   }
-  .temp__one {
+  .temp__text {
     font-size: 7.451rem;
     color: white;
     vertical-align: text-bottom;
-  }
-  .temp__two {
-    font-size: 9.313rem;
-    vertical-align: sub;
-    color: white;
   }
   .temp__symbol {
     font-size: 2.441rem;
@@ -91,7 +86,7 @@
     width: 100%;
     justify-content: center;
     color: #9ca3af;
-    margin-top: 32px;
+    margin-top: 88px;
   }
   .weather__day {
     text-transform: capitalize;
@@ -109,9 +104,11 @@
     justify-content: center;
     width: 100%;
     color: #9ca3af;
-    margin-top: 48px;
+    margin-top: 24px;
   }
   .location__text {
     margin-left: 8px;
+    font-size: 1.25rem;
+    text-transform: capitalize;
   }
 }
