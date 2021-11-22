@@ -5,6 +5,7 @@ const App = () => {
   const [woeId, setwoeId] = useState(null);
   const [weatherState, setWeatherState] = useState(null);
   const [temp, setTemp] = useState(null);
+  const [weatherIcon, setWeathericon] = useState(null);
   return (
     <div className='app__container'>
       <div className='search__container'>
