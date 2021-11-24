@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Card from './Components/Card';
 const App = () => {
   const [city, setCity] = useState(null);
   const [weatherState, setWeatherState] = useState(null);
@@ -16,6 +17,9 @@ const App = () => {
           `https://www.metaweather.com/api/location/${locationResponse.data[0].woeid}/`
         );
         setCity(woeIdResponse.data.title);
+        setWeatherState(
+          woeIdResponse.data['consolidated_weather'][0]['weather_state_name']
+        );
         setTemp(
           woeIdResponse.data['consolidated_weather'][0][`the_temp`].toFixed(0)
         );
@@ -31,6 +35,7 @@ const App = () => {
   return (
     <div className='app__container'>
       <div className='search__container'>
+        {/* navbar section */}
         <div className='navbar'>
           <input
             type='text'
@@ -41,6 +46,7 @@ const App = () => {
             <i className='fas fa-location-arrow fa-lg'></i>
           </button>
         </div>
+        {/* weather section */}
         {city && (
           <div className='weather__container'>
             <div className='weather__icon'>
@@ -64,6 +70,14 @@ const App = () => {
                 <span className='location__text'>{city}</span>
               </i>
             </div>
+          </div>
+        )}
+        {city && (
+          <div className='forecast__container'>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
           </div>
         )}
       </div>

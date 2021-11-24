@@ -6,6 +6,7 @@
   font-family: 'Raleway', sans-serif;
 }
 
+/* mobile layout */
 @media screen and (max-width: 375px) {
   .app__container {
     display: flex;
@@ -86,7 +87,7 @@
     width: 100%;
     justify-content: center;
     color: #9ca3af;
-    margin-top: 88px;
+    margin-top: 64px;
   }
   .weather__day {
     text-transform: capitalize;
@@ -104,11 +105,53 @@
     justify-content: center;
     width: 100%;
     color: #9ca3af;
-    margin-top: 40px;
+    margin-top: 24px;
+    padding-bottom: 48px;
   }
   .location__text {
     margin-left: 8px;
     font-size: 1.25rem;
     text-transform: capitalize;
+  }
+  .forecast__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+    column-gap: 16px;
+    row-gap: 16px;
+    background-color: #100e1d;
+    height: 100vh;
+    width: 100%;
+    padding-top: 24px;
+  }
+  .card:nth-child(odd) {
+    margin-left: 32px;
+  }
+  .card:nth-child(even) {
+    margin-right: 32px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #1e213a;
+    padding: 8px;
+  }
+  .card__date {
+    font-size: 1.25rem;
+  }
+  .card__icon {
+    height: 88px;
+    width: 88px;
+    margin-top: 16px;
+  }
+  .card__temp {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 24px;
+    font-size: 1.25rem;
   }
 }
