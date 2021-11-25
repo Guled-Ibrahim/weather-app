@@ -1,6 +1,8 @@
+import cloudBackground from './images/Cloud-background.png';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Card from './Components/Card';
+import moment from 'moment';
 const App = () => {
   const [city, setCity] = useState(null);
   const [weatherState, setWeatherState] = useState(null);
@@ -17,7 +19,7 @@ const App = () => {
         const woeIdResponse = await axios.get(
           `https://www.metaweather.com/api/location/${locationResponse.data[0].woeid}/`
         );
-        setWeatherForecast(woeIdResponse.data['consolidated_weather'].slice(1));
+        setWeatherForecast(woeIdResponse.data['consolidated_weather']);
         setCity(woeIdResponse.data.title);
         setWeatherState(
           woeIdResponse.data['consolidated_weather'][0]['weather_state_name']
@@ -52,7 +54,8 @@ const App = () => {
         {city && (
           <div className='weather__container'>
             <div className='weather__icon'>
-              <img src={weatherIcon} alt='icon.png' />
+              <img src={cloudBackground} alt='' className='weather__bg' />
+              <img src={weatherIcon} alt='icon.png' className='weather__img' />
             </div>
             <div className='weather__temp'>
               <p className='temp__text'>
@@ -64,8 +67,18 @@ const App = () => {
               <h2 className='weather__text'>{weatherState}</h2>
             </div>
             <div className='weather__present'>
-              <p className='weather__day'>today</p>
-              <p className='weather__date'>fri, 5 jun</p>
+              <p className='weather__day'>
+                {
+                  moment(weatherForecast.slice(0, 1)[0].applicable_date)
+                    .calendar()
+                    .split(' at')[0]
+                }
+              </p>
+              <p className='weather__date'>
+                {moment(weatherForecast.slice(0, 1).applicable_date).format(
+                  'ddd,D MMM'
+                )}
+              </p>
             </div>
             <div className='weather__location'>
               <i className='fas fa-map-marker-alt fa-lg'>
@@ -77,25 +90,27 @@ const App = () => {
         {/* weather forcast section */}
         {city && (
           <div className='forecast__container'>
-            {weatherForecast.map(
-              ({
-                id,
-                applicable_date,
-                min_temp,
-                max_temp,
-                weather_state_abbr,
-              }) => {
-                return (
-                  <Card
-                    key={id}
-                    date={applicable_date}
-                    minTemp={min_temp}
-                    maxTemp={max_temp}
-                    weatherIcon={weather_state_abbr}
-                  />
-                );
-              }
-            )}
+            {weatherForecast
+              .slice(1)
+              .map(
+                ({
+                  id,
+                  applicable_date,
+                  min_temp,
+                  max_temp,
+                  weather_state_abbr,
+                }) => {
+                  return (
+                    <Card
+                      key={id}
+                      date={applicable_date}
+                      minTemp={min_temp}
+                      maxTemp={max_temp}
+                      weatherIcon={weather_state_abbr}
+                    />
+                  );
+                }
+              )}
           </div>
         )}
       </div>
