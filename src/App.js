@@ -6,6 +6,7 @@ const App = () => {
   const [weatherState, setWeatherState] = useState(null);
   const [temp, setTemp] = useState(null);
   const [weatherIcon, setWeatherIcon] = useState();
+  const [weatherForecast, setWeatherForecast] = useState(null);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -16,6 +17,7 @@ const App = () => {
         const woeIdResponse = await axios.get(
           `https://www.metaweather.com/api/location/${locationResponse.data[0].woeid}/`
         );
+        setWeatherForecast(woeIdResponse.data['consolidated_weather'].slice(1));
         setCity(woeIdResponse.data.title);
         setWeatherState(
           woeIdResponse.data['consolidated_weather'][0]['weather_state_name']
@@ -30,7 +32,7 @@ const App = () => {
         });
       });
     }, 1000);
-  });
+  }, []);
 
   return (
     <div className='app__container'>
@@ -72,12 +74,28 @@ const App = () => {
             </div>
           </div>
         )}
+        {/* weather forcast section */}
         {city && (
           <div className='forecast__container'>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {weatherForecast.map(
+              ({
+                id,
+                applicable_date,
+                min_temp,
+                max_temp,
+                weather_state_abbr,
+              }) => {
+                return (
+                  <Card
+                    key={id}
+                    date={applicable_date}
+                    minTemp={min_temp}
+                    maxTemp={max_temp}
+                    weatherIcon={weather_state_abbr}
+                  />
+                );
+              }
+            )}
           </div>
         )}
       </div>
