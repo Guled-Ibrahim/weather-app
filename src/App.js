@@ -1,8 +1,10 @@
-import cloudBackground from './images/Cloud-background.png';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Card from './Components/Card';
+import axios from 'axios';
 import moment from 'moment';
+import cloudBackground from './images/Cloud-background.png';
+import Card from './Components/WeatherForecast';
+import WeatherHighlightCard from './Components/WeatherHighlight';
+
 const App = () => {
   const [city, setCity] = useState(null);
   const [weatherState, setWeatherState] = useState(null);
@@ -19,6 +21,7 @@ const App = () => {
         const woeIdResponse = await axios.get(
           `https://www.metaweather.com/api/location/${locationResponse.data[0].woeid}/`
         );
+        console.log(woeIdResponse);
         setWeatherForecast(woeIdResponse.data['consolidated_weather']);
         setCity(woeIdResponse.data.title);
         setWeatherState(
@@ -33,7 +36,7 @@ const App = () => {
           setWeatherIcon(module.default);
         });
       });
-    }, 1000);
+    }, 500);
   }, []);
 
   return (
@@ -47,7 +50,7 @@ const App = () => {
             className='navbar__input'
           />
           <button className='navbar__btn'>
-            <i className='fas fa-location-arrow fa-lg'></i>
+            <i className='fas fa-map-marker-alt fa-lg'></i>
           </button>
         </div>
         {/* weather section */}
@@ -89,28 +92,65 @@ const App = () => {
         )}
         {/* weather forcast section */}
         {city && (
-          <div className='forecast__container'>
-            {weatherForecast
-              .slice(1)
-              .map(
-                ({
-                  id,
-                  applicable_date,
-                  min_temp,
-                  max_temp,
-                  weather_state_abbr,
-                }) => {
-                  return (
-                    <Card
-                      key={id}
-                      date={applicable_date}
-                      minTemp={min_temp}
-                      maxTemp={max_temp}
-                      weatherIcon={weather_state_abbr}
-                    />
-                  );
-                }
-              )}
+          <div className='weather__detail'>
+            <div className='forecast__container'>
+              {weatherForecast
+                .slice(1)
+                .map(
+                  ({
+                    id,
+                    applicable_date,
+                    min_temp,
+                    max_temp,
+                    weather_state_abbr,
+                  }) => {
+                    return (
+                      <Card
+                        key={id}
+                        date={applicable_date}
+                        minTemp={min_temp}
+                        maxTemp={max_temp}
+                        weatherIcon={weather_state_abbr}
+                      />
+                    );
+                  }
+                )}
+            </div>
+            <p className='detail__text'>todays highlights</p>
+            <div className='wh__container'>
+              {weatherForecast &&
+                weatherForecast
+                  .slice(0, 1)
+                  .map(
+                    ({
+                      wind_speed,
+                      wind_direction,
+                      wind_direction_compass,
+                      humidity,
+                      visibility,
+                      air_pressure,
+                    }) => {
+                      return (
+                        <div className='wh__wind'>
+                          <p className='wind__title'>wind status</p>
+                          <p>
+                            <span>
+                              <i
+                                className='fas fa-location-arrow fa-sm wind__icon'
+                                style={{
+                                  transform: `rotate(${
+                                    wind_direction.toFixed(0) - 45
+                                  }deg)`,
+                                }}
+                              ></i>
+                              {wind_direction_compass}
+                            </span>
+                          </p>
+                        </div>
+                      );
+                    }
+                  )}
+            </div>
           </div>
         )}
       </div>
