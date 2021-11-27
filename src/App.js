@@ -4,6 +4,7 @@ import moment from 'moment';
 import cloudBackground from './images/Cloud-background.png';
 import Card from './Components/WeatherForecast';
 import WeatherHighlightCard from './Components/WeatherHighlight';
+import { Fragment } from 'react';
 
 const App = () => {
   const [city, setCity] = useState(null);
@@ -131,25 +132,64 @@ const App = () => {
                       air_pressure,
                     }) => {
                       return (
-                        <div className='wh__wind'>
-                          <p className='wind__title'>wind status</p>
-                          <p>
-                            <span>
-                              <i
-                                className='fas fa-location-arrow fa-sm wind__icon'
-                                style={{
-                                  transform: `rotate(${
-                                    wind_direction.toFixed(0) - 45
-                                  }deg)`,
-                                }}
-                              ></i>
-                              {wind_direction_compass}
-                            </span>
-                          </p>
-                        </div>
+                        <Fragment>
+                          <WeatherHighlightCard
+                            title={'wind status'}
+                            unit={wind_speed}
+                            measurement={'mph'}
+                            children={
+                              <p>
+                                <i
+                                  className='fas fa-location-arrow fa-sm wh__icon'
+                                  style={{
+                                    transform: `rotate(${
+                                      wind_direction.toFixed(0) - 45
+                                    }deg)`,
+                                  }}
+                                ></i>
+                                <span>{wind_direction_compass}</span>
+                              </p>
+                            }
+                          />
+                          ;
+                          <WeatherHighlightCard
+                            title='humidity'
+                            unit={humidity}
+                            measurement='%'
+                            children={
+                              <div className='wh__progress'>
+                                <div
+                                  className='progress__percentage'
+                                  style={{ width: `${humidity}%` }}
+                                ></div>
+                              </div>
+                            }
+                          />
+                          ;
+                          <WeatherHighlightCard
+                            title='visibility'
+                            unit={visibility}
+                            measurement=' miles'
+                          />
+                          ;
+                          <WeatherHighlightCard
+                            title='air pressure'
+                            unit={air_pressure}
+                            measurement='mb'
+                          />
+                          ;
+                        </Fragment>
                       );
                     }
                   )}
+            </div>
+            <div className='footer'>
+              <p className='footer__text'>
+                Created by:{' '}
+                <a href='https://github.com/gman112' className='footer__link'>
+                  gman112
+                </a>
+              </p>
             </div>
           </div>
         )}
