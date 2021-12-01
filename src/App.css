@@ -8,6 +8,11 @@
 
 /* mobile layout */
 @media screen and (max-width: 375px) {
+  /* loading page */
+  .loading {
+    background-color: #1e213a;
+    height: 100vh;
+  }
   .app__container {
     display: flex;
     flex-direction: column;
@@ -113,6 +118,8 @@
   }
   .cw__icon {
     margin-top: 72px;
+    height: 234px;
+    width: 203px;
   }
   .cw__temp {
     font-size: 7.451rem;
@@ -155,5 +162,8 @@
     margin-left: 8px;
     font-size: 1.25rem;
     text-transform: capitalize;
+  }
+  .wf__container {
+    background-color: red;
   }
 }

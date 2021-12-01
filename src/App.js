@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-/* import moment from 'moment';
-import Card from './Components/WeatherForecast';
+
+/* import Card from './Components/WeatherForecast';
 import WeatherHighlightCard from './Components/WeatherHighlight'; */
 
 const App = () => {
@@ -32,11 +32,7 @@ const App = () => {
                 );
                 setTemp(data.consolidated_weather[0].the_temp);
                 setWeatherForecast(data.consolidated_weather);
-                import(
-                  `./images/${data.consolidated_weather[0].weather_state_abbr}.png`
-                ).then((module) => {
-                  setWeatherIcon(module.default);
-                });
+                setWeatherIcon(data.consolidated_weather[0].weather_state_abbr);
               });
             setCity(data[0].title);
             isLoading(false);
@@ -48,12 +44,29 @@ const App = () => {
 
   useEffect(() => {
     cityInput !== ''
-      ? console.log('using searched location')
+      ? axios
+          .get(`https://www.metaweather.com/api/location/search/?query=${city}`)
+          .then(({ data }) => {
+            isLoading(true);
+            axios
+              .get(`https://www.metaweather.com/api/location/${data[0].woeid}/`)
+              .then(({ data }) => {
+                setWeatherState(
+                  data.consolidated_weather[0].weather_state_name
+                );
+                setTemp(data.consolidated_weather[0].the_temp);
+                setWeatherForecast(data.consolidated_weather);
+                setWeatherIcon(data.consolidated_weather[0].weather_state_abbr);
+              });
+            isLoading(false);
+          })
       : getDataGeolocation();
   }, [city]);
 
   return loading ? (
-    <p>loading...</p>
+    <div className='loading' id='loading'>
+      loading...
+    </div>
   ) : (
     <div className='app__container'>
       {toggleNavbar ? (
@@ -76,13 +89,14 @@ const App = () => {
           >
             <i className='fas fa-times fa-lg'></i>
           </div>
+          ``
           <div className='dropdown__search'>
             <input
               type='text'
               placeholder='search location'
               className='dropdown__input'
               value={cityInput}
-              onChange={(e) => setCityInput(e.target.value)}
+              onChange={(e) => setCityInput(e.target.value.toLowerCase())}
             />
             <button
               className='dropdown__btn'
@@ -101,7 +115,7 @@ const App = () => {
       {/* cw stands for current weather */}
       <div className='cw__container'>
         <img
-          src={weatherIcon}
+          src={`https://www.metaweather.com/static/img/weather/${weatherIcon}.svg`}
           alt={`${weatherIcon}.png`}
           className='cw__icon'
         />
@@ -120,6 +134,7 @@ const App = () => {
           </i>
         </div>
       </div>
+      <div className='wf__container'>weather forecast</div>
     </div>
   );
 };
