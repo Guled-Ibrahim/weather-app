@@ -6,7 +6,196 @@
   font-family: 'Raleway', sans-serif;
 }
 
-/* mobile layout */
+/* desktop and laptop */
+@media only screen and (min-width: 1124px) {
+  .loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #312e81;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%236e707a' fill-opacity='0.19' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+  .root__container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #312e81;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%236e707a' fill-opacity='0.19' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+  .app__container {
+    height: 90%;
+    width: 80%;
+    border-radius: 16px;
+    background-color: #100e1d;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .cw__container {
+    background-color: #1e213a;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+  }
+  .navbar {
+    background-color: #1e213a;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 32px;
+  }
+  .navbar__search {
+    display: flex;
+    justify-content: space-between;
+  }
+  .navbar__input {
+    padding: 8px;
+    background-color: #9ca3af;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+  }
+  .navbar__input::placeholder {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+  }
+  .navbar__input:focus {
+    outline: none;
+  }
+  .navbar__btn {
+    padding: 8px;
+    background-color: #9ca3af;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    margin-right: 8px;
+  }
+  .cw__icon {
+    height: 150px;
+    width: 150px;
+    margin-top: 124px;
+  }
+  .cw__temp {
+    font-size: 5.96rem;
+    font-weight: 100;
+    color: white;
+    margin-top: 32px;
+  }
+  .temp__symbol {
+    font-size: 3.052rem;
+    color: #9ca3af;
+  }
+  .cw__state {
+    color: #9ca3af;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 1.563rem;
+    margin-top: 24px;
+  }
+  .cw__info {
+    display: flex;
+    justify-content: center;
+    color: #9ca3af;
+    text-transform: capitalize;
+    font-size: 1rem;
+    margin-top: 48px;
+  }
+  .cw__present::after {
+    content: '\00b7';
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  .cw__location {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #9ca3af;
+    margin-top: 24px;
+  }
+  .location__name {
+    margin-left: 8px;
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: white;
+  }
+  .dropdown__close {
+    align-self: flex-end;
+    padding: 16px;
+  }
+  .dropdown__search {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    margin-top: 24px;
+    position: relative;
+  }
+  .dropdown__input {
+    height: 40px;
+    width: 70%;
+    background-color: transparent;
+    border: white solid 1px;
+    padding-left: 40px;
+    font-size: 1.25rem;
+    color: white;
+    outline: none;
+  }
+  .dropdown__btn {
+    width: 30%;
+    margin-left: 8px;
+    background-color: #3c47e9;
+    color: white;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    font-size: 1.25rem;
+  }
+  .search__icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .dropdown__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 24px;
+  }
+  .dropdown__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    width: 82%;
+    margin-left: 16px;
+  }
+  .dropdown__item:hover {
+    border: solid white 1px;
+  }
+  /* weather section showcasing forecast and detail */
+  .weather__info {
+    background-color: #100e1d;
+    width: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* mobile */
 @media screen and (max-width: 375px) {
   /* loading page */
   .loading {
@@ -199,7 +388,7 @@
   .card__icon {
     height: 56px;
     width: 64px;
-    margin-top: 8px;
+    margin-top: 16px;
   }
   .card__temp {
     display: flex;

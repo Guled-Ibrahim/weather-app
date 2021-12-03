@@ -1,7 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-/* import cookie from 'js-cookie'; */
 import ClipLoader from 'react-spinners/ClipLoader';
 import Card from './Components/WeatherForecast';
 import WeatherHighlightCard from './Components/WeatherHighlight';
@@ -16,8 +15,6 @@ const App = () => {
   const [toggleNavbar, isToggleNavbar] = useState(true);
   const [cityInput, setCityInput] = useState('');
   const [searchHistory, setSearchHistory] = useState([]);
-  /*  cookie.set('searchHistory', ['hello', 'world']); */
-  /*   const [searchCookies, setSearchCookies] = useCookies([]); */
 
   const getDataGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -70,7 +67,106 @@ const App = () => {
     <div className='loading'>
       <ClipLoader color={'#9ca3af'} loading={loading} size={150} />
     </div>
+  ) : window.screen.width > 375 ? (
+    /* desktop/ laptop version */
+    <div className='root__container'>
+      <div className='app__container'>
+        <div className='cw__container'>
+          {toggleNavbar ? (
+            <Fragment>
+              <div className='navbar'>
+                <input
+                  type='text'
+                  placeholder='enter city'
+                  className='navbar__input'
+                  onFocus={() => isToggleNavbar(!toggleNavbar)}
+                />
+                <button className='navbar__btn'>
+                  <i className='fas fa-map-marker-alt fa-lg'></i>
+                </button>
+              </div>
+              <img
+                src={`https://www.metaweather.com/static/img/weather/${weatherIcon}.svg`}
+                alt={`${weatherIcon}.png`}
+                className='cw__icon'
+              />
+              <p className='cw__temp'>
+                {temp?.toFixed(0)}
+                <span className='temp__symbol'>&#8451;</span>
+              </p>
+              <p className='cw__state'>{weatherState}</p>
+              <div className='cw__info'>
+                <p className='cw__present'>
+                  {moment().calendar().split(' at')[0]}
+                </p>
+                <p className='cw__date'>{moment().format('ddd, D MMM')}</p>
+              </div>
+              <div className='cw__location'>
+                <i className='fas fa-map-marker-alt fa-lg'>
+                  <span className='location__name'>{city}</span>
+                </i>
+              </div>
+            </Fragment>
+          ) : (
+            <div className='dropdown' style={{ height: '100vh' }}>
+              <div
+                className='dropdown__close'
+                onClick={() => isToggleNavbar(!toggleNavbar)}
+              >
+                <i className='fas fa-times fa-lg'></i>
+              </div>
+              <div className='dropdown__search'>
+                <input
+                  type='text'
+                  placeholder='search location'
+                  className='dropdown__input'
+                  value={cityInput}
+                  onChange={(e) => setCityInput(e.target.value.toLowerCase())}
+                />
+                <button
+                  className='dropdown__btn'
+                  onClick={() => {
+                    setCity(cityInput);
+                    setSearchHistory((prev) => [cityInput, ...prev]);
+                    isToggleNavbar(!toggleNavbar);
+                  }}
+                >
+                  search
+                </button>
+                <i className='fas fa-search search__icon'></i>
+              </div>
+              <ul className='dropdown__list'>
+                {searchHistory.map((item) => {
+                  return (
+                    <li
+                      className='dropdown__item'
+                      key={item}
+                      onClick={(e) => {
+                        setCity(e.target.innerText);
+                        isToggleNavbar(!toggleNavbar);
+                      }}
+                    >
+                      {item}
+                      <span>
+                        <i className='fas fa-chevron-right'></i>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+        {/* weather detail section */}
+        <div className='weather__info'>
+          <div className='measurement__container'>
+            <button className='temp__btn'></button>
+          </div>
+        </div>
+      </div>
+    </div>
   ) : (
+    /* mobile version */
     <div className='app__container'>
       {toggleNavbar ? (
         <div className='navbar'>
