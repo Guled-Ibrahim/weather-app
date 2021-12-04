@@ -27,7 +27,8 @@
   .app__container {
     height: 90%;
     width: 80%;
-    border-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-top-left-radius: 16px;
     background-color: #100e1d;
     display: flex;
     justify-content: space-evenly;
@@ -38,7 +39,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-top-left-radius: 16px;
   }
   .navbar {
     background-color: #1e213a;
@@ -124,7 +126,6 @@
     font-size: 1rem;
     text-transform: capitalize;
   }
-
   .dropdown {
     display: flex;
     flex-direction: column;
@@ -189,9 +190,92 @@
   .weather__info {
     background-color: #100e1d;
     width: 100%;
-    border-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-right-radius: 16px;
     display: flex;
     flex-direction: column;
+  }
+  .measurement__container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .temp__btn {
+    font-size: 1.25rem;
+    border-radius: 100%;
+    padding: 8px;
+    border: none;
+    margin-right: 16px;
+  }
+  .wf__container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 48px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #1e213a;
+    padding: 16px;
+  }
+  .card__date {
+    margin-top: 16px;
+  }
+  .card__icon {
+    height: 56px;
+    width: 64px;
+    margin-top: 16px;
+  }
+  .card__temp {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 32px;
+  }
+  .temp__max {
+    color: #9ca3af;
+  }
+  .detail__text {
+    color: white;
+    font-size: 1.563rem;
+    margin-top: 32px;
+    margin-left: 40px;
+    text-transform: capitalize;
+    font-weight: 800;
+  }
+  .wh__container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 8px;
+    column-gap: 8px;
+    background-color: red;
+  }
+  .wh__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #1e213a;
+  }
+  .wh__title {
+    font-size: 1.25rem;
+    text-transform: capitalize;
+    margin-top: 16px;
+  }
+  .wh__progress {
+    height: 10px;
+    width: 200px;
+    background-color: white;
+    margin-bottom: 32px;
+    border-radius: 16px;
+  }
+  .progress__percentage {
+    background-color: #ffec65;
+    height: 10px;
+    border-radius: 16px;
   }
 }
 

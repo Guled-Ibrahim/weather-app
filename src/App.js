@@ -15,6 +15,7 @@ const App = () => {
   const [toggleNavbar, isToggleNavbar] = useState(true);
   const [cityInput, setCityInput] = useState('');
   const [searchHistory, setSearchHistory] = useState([]);
+  const [toggleTempScale, istoggleTempScale] = useState(true);
 
   const getDataGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -160,7 +161,115 @@ const App = () => {
         {/* weather detail section */}
         <div className='weather__info'>
           <div className='measurement__container'>
-            <button className='temp__btn'></button>
+            <button
+              className='temp__btn'
+              style={{
+                backgroundColor: toggleTempScale ? `#E7E7EB` : '#585676',
+                color: toggleTempScale ? 'black' : 'white',
+              }}
+              onClick={() => istoggleTempScale(!toggleTempScale)}
+            >
+              &#8451;
+            </button>
+            <button
+              className='temp__btn'
+              style={{
+                backgroundColor: !toggleTempScale ? `#E7E7EB` : '#585676',
+                color: !toggleTempScale ? 'black' : 'white',
+              }}
+              onClick={() => istoggleTempScale(!toggleTempScale)}
+            >
+              &#8457;
+            </button>
+          </div>
+          <div className='wf__container'>
+            {weatherForecast
+              ?.slice(1)
+              .map(
+                ({
+                  id,
+                  applicable_date,
+                  min_temp,
+                  max_temp,
+                  weather_state_abbr,
+                }) => {
+                  return (
+                    <Card
+                      key={id}
+                      date={applicable_date}
+                      minTemp={min_temp}
+                      maxTemp={max_temp}
+                      weatherIcon={weather_state_abbr}
+                      toggleTemp={toggleTempScale}
+                    />
+                  );
+                }
+              )}
+          </div>
+          <p className='detail__text'>todays highlights</p>
+          <div className='wh__container'>
+            {weatherForecast
+              ?.slice(0, 1)
+              .map(
+                ({
+                  wind_speed,
+                  wind_direction,
+                  wind_direction_compass,
+                  humidity,
+                  visibility,
+                  air_pressure,
+                }) => {
+                  return (
+                    <Fragment>
+                      <WeatherHighlightCard
+                        key={1001}
+                        title={'wind status'}
+                        unit={wind_speed}
+                        measurement={'mph'}
+                        children={
+                          <p>
+                            <i
+                              className='fas fa-location-arrow fa-sm wh__icon'
+                              style={{
+                                transform: `rotate(${
+                                  wind_direction.toFixed(0) - 45
+                                }deg)`,
+                              }}
+                            ></i>
+                            <span>{wind_direction_compass}</span>
+                          </p>
+                        }
+                      />
+                      <WeatherHighlightCard
+                        key={1002}
+                        title='humidity'
+                        unit={humidity}
+                        measurement='%'
+                        children={
+                          <div className='wh__progress'>
+                            <div
+                              className='progress__percentage'
+                              style={{ width: `${humidity}%` }}
+                            ></div>
+                          </div>
+                        }
+                      />
+                      <WeatherHighlightCard
+                        key={1003}
+                        title='visibility'
+                        unit={visibility}
+                        measurement=' miles'
+                      />
+                      <WeatherHighlightCard
+                        key={1004}
+                        title='air pressure'
+                        unit={air_pressure}
+                        measurement='mb'
+                      />
+                    </Fragment>
+                  );
+                }
+              )}
           </div>
         </div>
       </div>
