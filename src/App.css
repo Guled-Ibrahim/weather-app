@@ -248,10 +248,15 @@
   }
   .wh__container {
     display: grid;
-    grid-template-columns: 50% 50%;
-    row-gap: 8px;
-    column-gap: 8px;
-    background-color: red;
+    grid-template-columns: 45% 45%;
+    grid-template-rows: auto auto;
+    row-gap: 16px;
+    column-gap: 16px;
+    margin-top: 32px;
+    justify-content: center;
+  }
+  .wh__container > div:nth-child(n + 3) > p {
+    margin-bottom: 4px;
   }
   .wh__card {
     display: flex;
@@ -259,18 +264,35 @@
     align-items: center;
     color: white;
     background-color: #1e213a;
+    width: 100%;
   }
   .wh__title {
     font-size: 1.25rem;
     text-transform: capitalize;
-    margin-top: 16px;
+    margin-top: 8px;
+  }
+  .wh__unit {
+    font-size: 2.441rem;
+    font-weight: 800;
+    margin-top: 8px;
+  }
+  .wh__measurement {
+    font-size: 1.953rem;
+  }
+  .wh__icon {
+    background-color: #9ca3af;
+    padding: 8px;
+    border-radius: 100%;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    margin-top: 24px;
   }
   .wh__progress {
     height: 10px;
     width: 200px;
     background-color: white;
-    margin-bottom: 32px;
     border-radius: 16px;
+    margin-top: 24px;
   }
   .progress__percentage {
     background-color: #ffec65;
