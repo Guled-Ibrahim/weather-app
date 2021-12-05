@@ -16,6 +16,7 @@ const App = () => {
   const [cityInput, setCityInput] = useState('');
   const [searchHistory, setSearchHistory] = useState([]);
   const [toggleTempScale, istoggleTempScale] = useState(true);
+  const [defaultLocation, setDefaultLocation] = useState();
 
   const getDataGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -38,6 +39,7 @@ const App = () => {
                 setWeatherIcon(data.consolidated_weather[0].weather_state_abbr);
               });
             setCity(data[0].title);
+            setDefaultLocation(data[0].title);
             isLoading(false);
           });
       },
@@ -82,7 +84,13 @@ const App = () => {
                   className='navbar__input'
                   onFocus={() => isToggleNavbar(!toggleNavbar)}
                 />
-                <button className='navbar__btn'>
+                <button
+                  className='navbar__btn'
+                  onClick={() => {
+                    setCityInput('');
+                    setCity(defaultLocation);
+                  }}
+                >
                   <i className='fas fa-map-marker-alt fa-lg'></i>
                 </button>
               </div>
@@ -286,7 +294,13 @@ const App = () => {
             onFocus={() => isToggleNavbar(!toggleNavbar)}
           />
           <button className='navbar__btn'>
-            <i className='fas fa-map-marker-alt fa-lg'></i>
+            <i
+              className='fas fa-map-marker-alt fa-lg'
+              onClick={() => {
+                setCityInput('');
+                setCity(defaultLocation);
+              }}
+            ></i>
           </button>
         </div>
       ) : (
